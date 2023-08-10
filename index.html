@@ -3,47 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Array cardio challenge # 7</title>
+    <title>JS challenge # 10</title>
+    <style>
+        .inbox{
+            margin: 10% 40%;
+    box-shadow: 3px 3px 17px 0px #7070c1;
+    color: gray;
+    background: lavender;
+    text-align: center;
+    padding: 12px;
+        }
+        .item{
+            display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    gap: 6px;
+    margin: 0px 25px;
+    border-bottom: 2px solid #983bbe73;
+        }
+        .item input[type="checkbox"]:checked + p{
+           
+                text-decoration: line-through;
+           
+        }
+    </style>
 </head>
 <body>
-   <script>
-     let people = [
-  { name: "John", year: 1988 },
-  { name: "Alice", year: 1986 },
-  { name: "Michael", year: 1970 },
-  { name: "Emily", year: 2015 }
-];
-let comments = [
-  { text: "Hello world", ID: 123456 },
-  { text: "Lorem ipsum", ID: 789012 },
-  { text: "Random sentence", ID: 345678 },
-  { text: "JavaScript array", ID: 901234 },
-  { text: "Sample text", ID: 567890 }
-];
-//some() will check that at least one thing in your array meets what you're looking for
-/* const isAdult = people.some(person => (((new Date()).getFullYear() - person.year) >= 18) ? true : false)
-console.log(isAdult); */ //output is True
+    <div class="inbox">
+        <div class="item"><input type="checkbox" name="" id=""><p>this is checkbox 01</p></div>
+        <div class="item"><input type="checkbox" name="" id=""><p>this is checkbox 02</p></div>
+        <div class="item"><input type="checkbox" name="" id=""><p>this is checkbox 03</p></div>
+        <div class="item"><input type="checkbox" name="" id=""><p>this is checkbox 04</p></div>
+        <div class="item"><input type="checkbox" name="" id=""><p>this is checkbox 05</p></div>
+        <div class="item"><input type="checkbox" name="" id=""><p>this is checkbox 06</p></div>
+        <div class="item"><input type="checkbox" name="" id=""><p>this is checkbox 07</p></div>
+        <div class="item"><input type="checkbox" name="" id=""><p>this is checkbox 08</p></div>
+        <div class="item"><input type="checkbox" name="" id=""><p>this is checkbox 09</p></div>
+    </div>
 
-//every() checks if everybody meets the criteria
-/* const isAdult = people.every(person => {
-   let age = (new Date()).getFullYear() - person.year;
-   return age >= 19 ;
-})
-console.log(isAdult) */
-
-
-//find() this method is similar to filter but instead of returning a subset of the array it returns the 1st item it finds
-// so lets find the comment with the id 345678
-/* const comment = comments.find(com => com.ID == 345678 ? true : false)
-console.table(comment) */
-
-
-//findIndex() is use to find where something is in the array
-const idToDel = comments.findIndex(com => com.ID == 345678);
-console.log(idToDel); // it will return 2 which means at position 3
-//now delete it 
-comments.splice(idToDel,2)
-console.table(comments);
-   </script>
+    <script>
+        const checkboxs = document.querySelectorAll('.inbox input[type = "checkbox" ]');
+        let lastChecked;
+        let inBetween = false;
+        function handleCheckbox(e){
+        //check if they had shift keydown & check that they're checking it(the checkbox) 
+        if(e.shiftKey && this.checked){
+            checkboxs.forEach(checkbox =>{
+                if(checkbox === this || checkbox === lastChecked)
+                {
+                    inBetween = !inBetween;
+                    
+                }
+                if(inBetween){
+                    checkbox.checked = true;
+                }
+                
+            })
+        }
+            lastChecked = this;
+        }
+        checkboxs.forEach(checkbox => checkbox.addEventListener('click',handleCheckbox));
+    </script>
 </body>
 </html>
